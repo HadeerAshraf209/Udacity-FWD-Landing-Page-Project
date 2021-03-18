@@ -50,8 +50,7 @@ createListElement();
 function elementViewPort(element) {
     let box = element.getBoundingClientRect();
     return (
-        box.top >= 0 && box.bottom <= window.innerHeight
-    );
+        box.top >= 0);
 };
 
 function activeClass(){
