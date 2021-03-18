@@ -53,17 +53,23 @@ function elementViewPort(element) {
         box.top >= 0);
 };
 
-function activeClass(){
-    for(section of sections){
-        //if the section in the viewport & doesn't contain active-class
-        if(elementViewPort(section) && !section.classList.contains("active-class")){
-            //then add the class to the section
-            section.classList.add('active-class');
-        } else{ //if the section is not in the viewport & contains active-class, then remove it
-            section.classList.remove('active-class');
-        }
+function activeClass() {
+    for (section of sections) {
+      //if the section in the viewport & doesn't contain active-class
+      console.log(elementViewPort(section));
+      if (
+        elementViewPort(section) &&
+        !section.classList.contains("your-active-class")
+      ) {
+        //then add the class to the section
+        section.classList.add("your-active-class");
+      } else {
+        //if the section is not in the viewport & contains active-class, then remove it
+  
+        section.classList.remove("your-active-class");
+      }
     }
-}
+  }
 
 document.addEventListener('scroll',activeClass());
 
