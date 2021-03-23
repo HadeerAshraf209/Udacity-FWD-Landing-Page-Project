@@ -35,4 +35,3 @@ All features are usable across modern desktop, tablet, and phone browsers.
 3. Build the navigation menu.
 4. Add functionality to distinguish the section in view.
 5. Add the functionality to scroll to sections.
-
