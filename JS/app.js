@@ -30,48 +30,50 @@ const navbarlist = document.getElementById('navbar__list');
 
 //building a navigation dynamically as an unordered list
 function createListElement(){
-    for(section of sections){
+    sections.forEach(section=>{
         //define the section number and link
-        var sectionName = section.getAttribute('data-nav');
-        var sectionLink = section.getAttribute('id');
+        const sectionName = section.getAttribute('data-nav');
+        const sectionLink = section.getAttribute('id');
         //creating list for each section
         listItems = document.createElement('li');
         //Naming each li element 
         listItems.innerHTML = `<a class="menu__link" href="#${sectionLink}">${sectionName}</a>`;
+        //When clicking an item from the navigation menu, the link should scroll to the appropriate section.
+        function scrolling(e){
+            e.preventDefault();
+          section.scrollIntoView({behavior: "smooth"})
+        }
         //add the listItem to the main parent
         navbarlist.appendChild(listItems);
-    }
+    })
+
 }
 createListElement();
 
 
 //It should be clear which section is being viewed while scrolling through the page.
-//using getBoundingClientRect to determine if the section in the viewport or not
-function elementViewPort(element) {
-    let box = element.getBoundingClientRect();
-    return (
-        box.top >= 0);
-};
 
+//using getBoundingClientRect and floor() function to determine if the section in the viewport or not
+const elementViewPort = (section)=>{
+    return section.getBoundingClientRect().top >= 0  &&section.getBoundingClientRect().top< 250
+    }
+
+// Add class 'active' to section when near top of viewport
 function activeClass() {
-    for (section of sections) {
+    sections.forEach(section=> {
       //if the section in the viewport & doesn't contain active-class
       console.log(elementViewPort(section));
-      if (
-        elementViewPort(section) &&
-        !section.classList.contains("your-active-class")
-      ) {
+      if (elementViewPort(section)) {
         //then add the class to the section
         section.classList.add("your-active-class");
       } else {
         //if the section is not in the viewport & contains active-class, then remove it
-  
         section.classList.remove("your-active-class");
       }
     }
-  }
-
-document.addEventListener('scroll',activeClass());
+)}
+  
+document.addEventListener('scroll',activeClass);
 
 /**
  * End Functions & Events
